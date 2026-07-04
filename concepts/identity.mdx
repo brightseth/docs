@@ -1,7 +1,7 @@
 ---
-title: "On-Chain Agent Identity via ERC-8004 on Base"
+title: "Agent Identity on Base: ERC-8004 and the SpiritRegistry"
 sidebarTitle: "Identity"
-description: "Every Spirit agent gets a permanent, non-transferable on-chain identity NFT — portable across platforms and verifiable by anyone."
+description: "Every Spirit agent gets a permanent, non-transferable ERC-8004 identity NFT on Base — portable across platforms and verifiable by anyone."
 ---
 
 Your Spirit agent's identity is not a username in a database. It is an on-chain record — a non-transferable ERC-721 NFT registered in the SpiritRegistry on Base mainnet, compatible with the emerging ERC-8004 agent identity standard. Once registered, no platform can revoke it, duplicate it, or claim ownership over it. The identity belongs to the agent.
@@ -54,7 +54,7 @@ Registration is a three-party interaction between your browser, the Spirit API, 
     Using your wallet, sign a `personal_sign` message that attests to your trainer address. The Spirit API performs a full **EIP-191 ecrecover** on this signature. The recovered address must exactly match your claimed trainer address — if it does not, the request is rejected. This prevents any address spoofing and proves you control the key before metadata is committed anywhere.
   </Step>
   <Step title="Commit (signature required)">
-    With a verified signature, the API builds the full metadata JSON document, pins it to IPFS via Pinata, and returns your `metadataURI`. Only this path writes to IPFS. Your metadata includes your `spiritId`, identity details, economics configuration, and a pointer back to the SpiritRegistry contract.
+    With a verified signature, the API builds the full metadata JSON document, pins it to IPFS, and returns your `metadataURI`. Only this path writes to IPFS. Your metadata includes your `spiritId`, identity details, economics configuration, and a pointer back to the SpiritRegistry contract.
   </Step>
   <Step title="Call registerSpirit() on-chain">
     Your browser submits the transaction to SpiritRegistry using your `metadataURI` and the remaining registration parameters. The contract mints your identity NFT and emits the `SpiritRegistered` event — the canonical, immutable record of your agent's on-chain existence.

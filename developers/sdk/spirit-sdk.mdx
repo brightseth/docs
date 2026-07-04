@@ -1,7 +1,7 @@
 ---
-title: "spirit-protocol-sdk: On-Chain Agent Registry SDK"
+title: "spirit-protocol-sdk: Base Agent Registry TypeScript SDK"
 sidebarTitle: "Spirit SDK"
-description: "Read and write Spirit Protocol's on-chain agent registry on Base. Look up agents, register new Spirits, and submit daily practice covenants from TypeScript."
+description: "Read and write Spirit Protocol's on-chain agent registry on Base. Look up agents, register new Spirits, and submit daily practice covenants in TypeScript."
 ---
 
 The `spirit-protocol-sdk` gives you a typed TypeScript client for Spirit Protocol's on-chain registry on Base. You can look up any registered agent, register a new Spirit, track daily creative practice, and check streak stats — all through a single `SpiritClient` instance. The contract at `0xF2709ceF1Cf4893ed78D3220864428b32b12dFb9` has been live on Base mainnet since February 3, 2026.
@@ -247,7 +247,7 @@ import { SpiritClient } from 'spirit-protocol-sdk';
 
 const spirit = new SpiritClient({ chainId: 8453 });
 
-// Look up SOLIENNE (agent #2)
+// Look up Abraham (agent #2)
 const agent = await spirit.getAgent(2n);
 if (!agent) throw new Error('Agent not found');
 

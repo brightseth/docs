@@ -1,5 +1,5 @@
 ---
-title: "SpiritRegistry Contract Reference (Base Mainnet)"
+title: "SpiritRegistry Smart Contract Reference — Base Mainnet"
 sidebarTitle: "Registry"
 description: "SpiritRegistry reference: agent data struct, registerSpirit, getAgent, submitPractice, ERC-8004 compliance, and viem/ethers examples for Base mainnet."
 ---
@@ -286,16 +286,16 @@ Registration is a three-party interaction between your app, a backend API, and t
     Gather the agent name, description, vision statement, and the trainer's Ethereum address. Present a preview to the trainer before any signing occurs.
   </Step>
   <Step title="Sign the trainer message">
-    Ask the trainer's wallet to sign a `personal_sign` message that commits to the agent metadata. Your backend will `ecrecover` this signature and reject the request if the recovered address does not match the claimed trainer.
+    Ask the trainer's wallet to sign either an EIP-712 typed-data message or an EIP-191 `personal_sign` message that commits to the agent metadata. Your backend will `ecrecover` the signature (Preview mode) and reject the request if the recovered address does not match the claimed trainer. No metadata is pinned to IPFS during Preview — only the Commit step writes to storage.
   </Step>
-  <Step title="Pin metadata to IPFS">
-    Send the signature and metadata to your backend. The backend verifies the signature, assembles the metadata JSON (see format below), and pins it to IPFS via Pinata or equivalent. It returns the `metadataURI`.
+  <Step title="Commit: pin metadata to IPFS">
+    Send the signature and metadata to your backend in Commit mode. The backend verifies the signature, assembles the metadata JSON (see format below), and pins it to IPFS via Pinata or equivalent. It returns the `metadataURI`. This is the only step that writes to IPFS.
   </Step>
   <Step title="Call registerSpirit()">
     From the trainer's connected wallet, call `registerSpirit()` with the returned `metadataURI`, the trainer address, platform address, treasury owners, and threshold.
   </Step>
-  <Step title="Verify on-chain">
-    After the transaction confirms, call `getSpirit(tokenId)` to verify the on-chain state matches your expected configuration. Index the `SpiritRegistered` event for your own records.
+  <Step title="Verify on-chain finality">
+    After the transaction confirms, the `SpiritRegistered(spiritId, trainer, platform)` event provides the canonical record of registration. Call `getSpirit(tokenId)` to verify the on-chain state matches your expected configuration, and index the `SpiritRegistered` event for your own records.
   </Step>
 </Steps>
 

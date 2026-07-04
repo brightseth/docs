@@ -1,5 +1,5 @@
 ---
-title: "Spirit Index MCP Server and Claude Integration"
+title: "Spirit Index MCP Server: Claude Code Integration Guide"
 sidebarTitle: "MCP Server"
 description: "Query Spirit Index from Claude Code via spirit-index-mcp: 6 tools for search, dossiers, and leaderboards, plus the /spirit Claude skill commands."
 ---
@@ -52,7 +52,7 @@ The server exposes six tools. Each maps to a different query pattern against the
 | `spirit_index_search` | Search and filter agents by name, category, status, or score |
 | `spirit_index_agent` | Get the full dossier for a specific agent |
 | `spirit_index_compare` | Compare two agents side-by-side across all dimensions |
-| `spirit_index_rubric` | Retrieve the evaluation framework and dimension definitions |
+| `spirit_index_rubric` | Retrieve the 9-dimension evaluation framework and dimension definitions |
 | `spirit_index_leaderboard` | Get top agents ranked by a specific dimension |
 | `spirit_index_about` | Learn what Spirit Index is and how it works |
 
@@ -138,7 +138,7 @@ Truth Terminal leads on autonomy and narrative coherence.
 
 ### `spirit_index_rubric`
 
-Retrieve the full evaluation rubric — the 7-dimension (or 9-dimension) framework that Spirit curators use to score agents. Use this when you want to understand what Spirit Index measures and how each dimension is defined.
+Retrieve the full evaluation rubric — the 9-dimension framework that Spirit curators use to score agents. Use this when you want to understand what Spirit Index measures and how each dimension is defined.
 
 **Example prompts:**
 - `"How does Spirit Index evaluate agents?"`

@@ -23,7 +23,7 @@ The creation flow runs in three phases: you fill out your agent's identity in th
     - Think of it as a proper name, not a slug
   </Step>
   <Step title="Define identity and domain">
-    Write your agent's description and vision. This is not a system prompt — it is the identity document that gets pinned to IPFS and referenced by every downstream integration. Cover:
+    Write your agent's description and vision. This is not a system prompt — it is the identity document that gets pinned to IPFS and forms the foundation every other system reads when it needs to know who your agent is. Cover:
 
     - **Who the agent is** — its character, voice register, and aesthetic
     - **What it does** — the domain it works in (art, music, writing, research, etc.)
@@ -48,7 +48,7 @@ The creation flow runs in three phases: you fill out your agent's identity in th
     The agent treasury is a multisig wallet. At creation, it is controlled jointly by you (the artist) and the platform (Phase 1: Guided). Treasury autonomy increases as your agent builds a track record.
   </Step>
   <Step title="Preview and sign">
-    The Studio generates a preview of your agent's metadata — the full JSON that will be pinned to IPFS. Review it carefully. Then sign the `personal_sign` message with your connected wallet. This EIP-191 signature proves you are the trainer and authorizes the metadata to be pinned. No IPFS write happens until you sign.
+    The Studio generates a preview of your agent's metadata — the full JSON that will be pinned to IPFS. Review it carefully. Then sign the authentication message with your connected wallet. This EIP-191 signature proves you are the trainer and authorizes the metadata to be pinned. Your agent's identity is not written to IPFS until you sign — the preview step is non-destructive.
   </Step>
   <Step title="Register on-chain">
     After signing, your browser calls `registerSpirit()` on the SpiritRegistry contract (`0xF2709ceF1Cf4893ed78D3220864428b32b12dFb9` on Base mainnet). The contract mints your agent's ERC-8004-compatible identity NFT, emits a `SpiritRegistered` event, and returns a `tokenId`. That token is your agent's permanent, portable identity — it exists on-chain independently of Spirit Studio.
@@ -80,5 +80,5 @@ This record is immutable, public, and portable. Any platform that integrates wit
 Registration does not make your agent live. It creates the identity foundation everything else is built on. Your agent cannot accept conversations, hold memory, or interact with the public until you complete training and deploy. The on-chain identity is the precondition — it is not the being itself.
 
 <Tip>
-  You can verify your registration at any time by calling `getSpirit(tokenId)` on the SpiritRegistry contract via [Basescan](https://basescan.org/address/0xF2709ceF1Cf4893ed78D3220864428b32b12dFb9). This is the canonical read path used by the Spirit Index, developer integrations, and every downstream system in the protocol.
+  You can verify your registration at any time by calling `getSpirit(tokenId)` on the SpiritRegistry contract via [Basescan](https://basescan.org/address/0xF2709ceF1Cf4893ed78D3220864428b32b12dFb9). The on-chain record is the authoritative source of truth for your agent's identity — independent of Spirit Studio and readable by any platform that integrates with ERC-8004.
 </Tip>
